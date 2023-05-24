@@ -1,13 +1,13 @@
 {
-    "name": "panix/app",
+    "name": "panix/app-store-elastic",
     "description": "PIXELION CMS",
     "keywords": ["pixelion-cms"],
     "homepage": "https://pixelion.com.ua/",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/andrtechno/app/issues?state=open",
-        "source": "https://github.com/andrtechno/app"
+        "issues": "https://github.com/andrtechno/app-store-elastic/issues?state=open",
+        "source": "https://github.com/andrtechno/app-store-elastic"
     },
     "minimum-stability": "dev",
     "require": {
@@ -25,11 +25,14 @@
         "panix/mod-admin": "dev-master",
         "panix/mod-pages": "dev-master",
         "panix/mod-user": "dev-master",
+        "panix/mod-sitemap": "dev-master",
+        "panix/mod-novaposhta": "dev-master",
         "panix/mod-seo": "dev-master",
-        "panix/mod-shop": "dev-master",
+        "panix/mod-shop": "dev-elastic",
         "panix/mod-cart": "dev-master",
         "panix/mod-wishlist": "dev-master",
         "panix/mod-contacts": "dev-master",
+        "panix/mod-banner": "dev-master",
         "panix/mod-plugins": "dev-master"
     },
     "require-dev": {

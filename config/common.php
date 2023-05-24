@@ -10,13 +10,13 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
         '@uploads' => '@app/web/uploads',
-	'@panix' => '@vendor/panix',
+        '@panix' => '@vendor/panix',
     ],
     'bootstrap' => [
         'log',
         'maintenanceMode',
         'panix\engine\BootstrapModule',
-      //  'telegram'
+        //  'telegram'
     ],
     'controllerMap' => [
         'site' => 'panix\engine\controllers\WebController',
@@ -40,8 +40,18 @@ $config = [
         'user' => ['class' => 'panix\mod\user\Module'],
         'seo' => ['class' => 'panix\mod\seo\Module'],
         'pages' => ['class' => 'panix\mod\pages\Module'],
-        'shop' => ['class' => 'panix\mod\shop\Module'],
-        'cart' => ['class' => 'panix\mod\cart\Module'],
+        'shop' => [
+            'class' => 'panix\mod\shop\Module',
+            'elasticIndex'=>'product'
+        ],
+        'cart' => [
+            'class' => 'panix\mod\cart\Module',
+            'modalView' => '@theme/widgets/cart/_items',
+            'emptyView' => '@theme/widgets/cart/_empty'
+        ],
+        'novaposhta' => ['class' => 'panix\mod\novaposhta\Module'],
+        'banner' => ['class' => 'panix\mod\banner\Module'],
+        'sitemap' => ['class' => 'panix\mod\sitemap\Module'],
         'wishlist' => ['class' => 'panix\mod\wishlist\Module'],
         'contacts' => ['class' => 'panix\mod\contacts\Module'],
     ],
@@ -131,9 +141,9 @@ $config = [
 
             'class' => '\panix\engine\web\DbSession',
             'cookieParams' => [
-				'httponly' => true,
-				'sameSite' => PHP_VERSION_ID >= 70300 ? yii\web\Cookie::SAME_SITE_LAX : null,
-			],
+                'httponly' => true,
+                'sameSite' => PHP_VERSION_ID >= 70300 ? yii\web\Cookie::SAME_SITE_LAX : null,
+            ],
             //'class' => '\yii\web\DbSession',
             //'writeCallback'=>['panix\engine\web\DbSession', 'writeFields']
         ],
@@ -145,11 +155,11 @@ $config = [
         ],
         'user' => [
             'class' => 'panix\mod\user\components\WebUser',
-             'identityCookie' => [
-				'name' => '_identity',
-				'sameSite' => PHP_VERSION_ID >= 70300 ? yii\web\Cookie::SAME_SITE_LAX : null,
-				//'httpOnly' => true
-			 ],
+            'identityCookie' => [
+                'name' => '_identity',
+                'sameSite' => PHP_VERSION_ID >= 70300 ? yii\web\Cookie::SAME_SITE_LAX : null,
+                //'httpOnly' => true
+            ],
         ],
         'mailer' => [
             'class' => 'panix\engine\Mailer',

@@ -18,7 +18,11 @@ $config = [
     ],
     'modules' => [
         'shop' => [
-            'class' => 'panix\mod\shop\api\Module'
+            'class' => 'panix\mod\shop\api\Module',
+            'host' => 'example-domain.com',
+            'ips'=>['127.0.0.1', '::1'],
+            'filterClass' => 'panix\mod\shop\components\FilterElastic',
+            'elasticIndex'=>'product'
         ],
         //'user' => ['class' => 'panix\mod\user\Module'],
     ],
@@ -26,6 +30,16 @@ $config = [
         'api' => 'panix\engine\controllers\ApiController',
     ],
     'components' => [
+        'elasticsearch' => [
+            'class' => 'yii\elasticsearch\Connection',
+            'auth' => ['username' => 'elastic', 'password' => ''],
+            'connectionTimeout'=>680,
+            'nodes' => [
+                ['http_address' => '127.0.0.1:9200'],
+                // configure more hosts if you have a cluster
+            ],
+            'dslVersion' => 7, // default is 5
+        ],
         'user' => [
             'identityClass' => 'panix\mod\user\models\User',
             'enableAutoLogin' => true,
