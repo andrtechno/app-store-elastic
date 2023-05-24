@@ -1,0 +1,20 @@
+<?php
+
+error_reporting(E_ALL);
+//Timezone
+date_default_timezone_set("UTC");
+
+// ip-addresses deployed or production
+if (in_array($_SERVER['REMOTE_ADDR'], ['127.0.0.1'])) {
+    defined('YII_DEBUG') or define('YII_DEBUG', true);
+    defined('YII_ENV') or define('YII_ENV', 'dev');
+}
+
+
+require(__DIR__ . '/../vendor/yiisoft/yii2/Yii.php');
+require(__DIR__ . '/../vendor/autoload.php');
+
+$config = require __DIR__ . '/../config/api.php';
+
+$app = new \panix\engine\ApiApplication($config);
+$app->run();

@@ -1,0 +1,98 @@
+{
+    "name": "panix/app",
+    "description": "PIXELION CMS",
+    "keywords": ["pixelion-cms"],
+    "homepage": "https://pixelion.com.ua/",
+    "type": "project",
+    "license": "BSD-3-Clause",
+    "support": {
+        "issues": "https://github.com/andrtechno/app/issues?state=open",
+        "source": "https://github.com/andrtechno/app"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.4.0",
+        "yiisoft/yii2": "~2.0.30",
+        "yiisoft/yii2-jui": "^2.0.0",
+        "yiisoft/yii2-smarty": "~2.0.0",
+        "yiisoft/yii2-bootstrap4": "^2.0.0",
+        "yiisoft/yii2-swiftmailer": "~2.1.0",
+        "yiisoft/yii2-debug": "~2",
+        "panix/composer": "dev-main",
+        "panix/theme-basic": "dev-main",
+        "panix/theme-dashboard": "~1",
+        "panix/engine": "dev-master",
+        "panix/mod-admin": "dev-master",
+        "panix/mod-pages": "dev-master",
+        "panix/mod-user": "dev-master",
+        "panix/mod-seo": "dev-master",
+        "panix/mod-shop": "dev-master",
+        "panix/mod-cart": "dev-master",
+        "panix/mod-wishlist": "dev-master",
+        "panix/mod-contacts": "dev-master",
+        "panix/mod-plugins": "dev-master"
+    },
+    "require-dev": {
+        "yiisoft/yii2-gii": "~2",
+        "yiisoft/yii2-faker": "~2.0.0",
+        "codeception/base": "~2.3.0",
+        "codeception/verify": "~0.4.0",
+        "codeception/specify": "~0.4.6",
+        "symfony/browser-kit": ">=2.7 <=4.2.4"
+    },
+    "config": {
+        "process-timeout": 1800,
+        "preferred-install": {
+            "*/theme-*": "dist",
+            "panix/composer": "dist",
+            "yiisoft/*": "dist"
+        }
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "yii\\composer\\Installer::postInstall"
+        ],
+		"post-db-config": [
+            "Pixelion\\Composer\\Installers\\Installer::settingsDb"
+        ],
+        "post-create-project-cmd": [
+            "Pixelion\\Composer\\Installers\\Installer::postCreateProject",
+            "yii\\composer\\Installer::postCreateProject",
+            "yii\\composer\\Installer::postInstall"
+        ]
+    },
+    "extra": {
+        "Pixelion\\Composer\\Installers\\Installer::postCreateProject": {
+            "createDir": [
+                {
+                    "web/uploads/content": "0755"
+                }
+            ],
+	    "settingsDb": [
+                "config/db.php",
+                "config/db_local.php"
+            ]
+        },
+        "yii\\composer\\Installer::postCreateProject": {
+            "setPermission": [
+                {
+                    "runtime": "0777",
+                    "web/assets": "0777",
+                    "web/uploads": "0755",
+                    "cmd": "0755"
+                }
+            ]
+        },
+        "yii\\composer\\Installer::postInstall": {
+            "generateCookieValidationKey": [
+                "config/web.php"
+            ]
+        }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://asset-packagist.org"
+        }
+    ]
+}
